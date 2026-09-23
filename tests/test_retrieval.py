@@ -19,3 +19,12 @@ print("\n--- A middle chunk ---")
 mid = len(chunks) // 2
 print(f"Pages {chunks[mid]['page_start']}-{chunks[mid]['page_end']}, {chunks[mid]['word_count']} words")
 print(chunks[mid]["text"][:300])
+
+from src.embeddings import embed_chunks
+
+print("\n--- Embedding chunks (this may take a minute on first run, downloading the model) ---")
+embedded_chunks = embed_chunks(chunks[:5])  # just first 5 for a quick test
+
+print(f"Embedded {len(embedded_chunks)} chunks")
+print(f"Embedding vector length: {len(embedded_chunks[0]['embedding'])}")
+print(f"First 5 values of first chunk's embedding: {embedded_chunks[0]['embedding'][:5]}")
