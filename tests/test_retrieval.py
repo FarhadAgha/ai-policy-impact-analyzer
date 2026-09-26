@@ -28,3 +28,17 @@ embedded_chunks = embed_chunks(chunks[:5])  # just first 5 for a quick test
 print(f"Embedded {len(embedded_chunks)} chunks")
 print(f"Embedding vector length: {len(embedded_chunks[0]['embedding'])}")
 print(f"First 5 values of first chunk's embedding: {embedded_chunks[0]['embedding'][:5]}")
+
+from src.retriever import build_vector_store, retrieve_relevant_chunks
+from src.embeddings import embed_chunks
+
+print("\n--- Building full vector store (this will embed all 260 chunks, may take a minute) ---")
+all_embedded_chunks = embed_chunks(chunks)
+collection = build_vector_store(all_embedded_chunks)
+print(f"Vector store built with {collection.count()} chunks")
+
+print("\n--- Test retrieval: transparency ---")
+results = retrieve_relevant_chunks("What does this policy say about transparency requirements?", collection, top_k=3)
+for r in results:
+    print(f"\nPages {r['page_start']}-{r['page_end']} (score: {r['similarity_score']})")
+    print(r["text"][:250])
