@@ -61,13 +61,36 @@ if uploaded_file is not None and st.session_state.collection is None:
         f"Document processed: {metadata.get('page_count')} pages, "
         f"{st.session_state.num_chunks} chunks indexed."
     )
-
+from src.dashboard_sections import DASHBOARD_SECTIONS
 if st.session_state.collection is not None:
     st.divider()
-    st.header("2. Ask About This Policy")
+    st.header("2. Policy Dashboard")
+
+    tabs = st.tabs(list(DASHBOARD_SECTIONS.keys()))
+
+    for tab, (section_name, section_question) in zip(tabs, DASHBOARD_SECTIONS.items()):
+        with tab:
+            cache_key = f"section_{section_name}"
+            if cache_key not in st.session_state:
+                with st.spinner(f"Analyzing {section_name}..."):
+                    st.session_state[cache_key] = answer_question(
+                        section_question, st.session_state.collection
+                    )
+
+            result = st.session_state[cache_key]
+            st.markdown(result["answer"])
+
+            st.markdown("**Evidence**")
+            citations = format_evidence_list(result["evidence"])
+            for c in citations:
+                with st.expander(f"{c['citation']} (relevance: {c['confidence']})"):
+                    st.write(c["excerpt"])
+if st.session_state.collection is not None:
+    st.divider()
+    st.header("3. Ask About This Policy")
 
     question = st.text_input(
-        "Ask a question about the uploaded policy",
+        "Ask any question about the uploaded policy:",
         placeholder="e.g. What does this policy require from AI developers?"
     )
 
