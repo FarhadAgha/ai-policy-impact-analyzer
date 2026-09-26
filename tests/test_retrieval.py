@@ -42,3 +42,14 @@ results = retrieve_relevant_chunks("What does this policy say about transparency
 for r in results:
     print(f"\nPages {r['page_start']}-{r['page_end']} (score: {r['similarity_score']})")
     print(r["text"][:250])
+
+from src.analyzer import answer_question
+
+print("\n--- Testing full RAG Q&A ---")
+result = answer_question("What does this policy say about transparency requirements?", collection)
+
+print(f"\nQuestion: {result['question']}")
+print(f"\nAnswer:\n{result['answer']}")
+print(f"\nBased on {len(result['evidence'])} evidence chunks:")
+for e in result["evidence"]:
+    print(f"  - Pages {e['page_start']}-{e['page_end']} (score: {e['similarity_score']})")
