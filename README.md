@@ -43,19 +43,8 @@ Future improvements
 Formal retrieval evaluation (Precision@K/Recall@K) · policy comparison (two documents side by side) · OCR support · FastAPI + React frontend on the same Python RAG core
 
 Project structure
-      ai-policy-impact-analyzer/
-          ├── app.py
-          ├── src/
-          │   ├── pdf_processor.py      # PDF → page-tagged text
-          │   ├── chunker.py            # text → overlapping chunks
-          │   ├── embeddings.py         # chunks → vectors
-          │   ├── retriever.py          # vector store + semantic search
-          │   ├── analyzer.py           # RAG orchestration + LLM calls
-          │   ├── citations.py          # evidence formatting
-          │   ├── prompts.py            # LLM prompt templates
-          │   └── dashboard_sections.py # dashboard question definitions
-          ├── tests/
-          └── data/sample_policies/
+      <img width="365" height="214" alt="image" src="https://github.com/user-attachments/assets/8b04d69d-3e11-4826-8a49-a791fb7ac32a" />
+
 
 Ethical note
 
