@@ -66,25 +66,30 @@ if st.session_state.collection is not None:
     st.divider()
     st.header("2. Policy Dashboard")
 
-    tabs = st.tabs(list(DASHBOARD_SECTIONS.keys()))
+    selected_section = st.radio(
+        "Choose a section",
+        list(DASHBOARD_SECTIONS.keys()),
+        horizontal=True,
+        label_visibility="collapsed",
+    )
 
-    for tab, (section_name, section_question) in zip(tabs, DASHBOARD_SECTIONS.items()):
-        with tab:
-            cache_key = f"section_{section_name}"
-            if cache_key not in st.session_state:
-                with st.spinner(f"Analyzing {section_name}..."):
-                    st.session_state[cache_key] = answer_question(
-                        section_question, st.session_state.collection
-                    )
+    cache_key = f"section_{selected_section}"
+    if cache_key not in st.session_state:
+        with st.spinner(f"Analyzing {selected_section}..."):
+            st.session_state[cache_key] = answer_question(
+                DASHBOARD_SECTIONS[selected_section], 
+                st.session_state.collection,
+                top_k=6,
+            )
 
-            result = st.session_state[cache_key]
-            st.markdown(result["answer"])
+    result = st.session_state[cache_key]
+    st.markdown(result["answer"])
 
-            st.markdown("**Evidence**")
-            citations = format_evidence_list(result["evidence"])
-            for c in citations:
-                with st.expander(f"{c['citation']} (relevance: {c['confidence']})"):
-                    st.write(c["excerpt"])
+    st.markdown("**Evidence**")
+    citations = format_evidence_list(result["evidence"])
+    for c in citations:
+        with st.expander(f"{c['citation']} (relevance: {c['confidence']})"):
+            st.write(c["excerpt"])
 if st.session_state.collection is not None:
     st.divider()
     st.header("3. Ask About This Policy")

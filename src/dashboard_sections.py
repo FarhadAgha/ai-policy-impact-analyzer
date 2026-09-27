@@ -43,6 +43,13 @@ DASHBOARD_SECTIONS = {
         "cost, regulatory uncertainty, or ambiguous requirements? Present "
         "these neutrally, not as failures."
     ),
+        "Policy Trade-offs": (
+        "What tensions or trade-offs does this policy involve — such as "
+        "innovation vs. regulation, safety vs. speed of deployment, "
+        "transparency vs. confidentiality, compliance vs. cost, or "
+        "central oversight vs. organizational flexibility? Explain each "
+        "trade-off neutrally without declaring a winner."
+    ),
     "Implementation Challenges": (
         "What does this policy specify about enforcement responsibility, "
         "required resources, technical standards, reporting mechanisms, "
