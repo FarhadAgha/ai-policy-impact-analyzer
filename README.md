@@ -6,7 +6,7 @@ Live Demo:- https://ai-policy-impact-analyzer-fsnhbmqek87kujekjieb2b.streamlit.a
 
 What it does
 
-Upload an AI policy/regulation PDF and get:
+Upload an AI policy/regulation PDF and you will get:
 
 An automated dashboard: Overview, Key Requirements, Stakeholder Impact, Policy Dimensions, Benefits, Concerns, Trade-offs, Implementation Challenges
 A Q&A feature to ask specific questions about the document
