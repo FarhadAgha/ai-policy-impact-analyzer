@@ -5,7 +5,7 @@ A RAG based tool that analyzes AI policy PDFs and produces a structured, evidenc
 Live Demo:- https://ai-policy-impact-analyzer-fsnhbmqek87kujekjieb2b.streamlit.app/
  
 What it does
- 
+
 Upload an AI policy/regulation PDF and you will get:
 
 An automated dashboard: Overview, Key Requirements, Stakeholder Impact, Policy Dimensions, Benefits, Concerns, Trade-offs, Implementation Challenges
